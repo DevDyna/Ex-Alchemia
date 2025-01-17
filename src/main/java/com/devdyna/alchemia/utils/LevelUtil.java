@@ -5,12 +5,21 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootParams.Builder;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 public class LevelUtil {
     public static boolean isDimension(Level level, ResourceKey<Level> dim) {
@@ -42,8 +51,6 @@ public class LevelUtil {
         return ResourceByTag(tag).size() - 1;
     }
 
-
-
     public static void popItemFromPos(Level level, double x, double y, double z, ItemStack itemStack) {
         ItemEntity itementity = new ItemEntity(level,
                 x,
@@ -54,8 +61,29 @@ public class LevelUtil {
     }
 
     public static void popItemFromPos(Level level, int x, int y, int z, ItemStack itemStack) {
-        popItemFromPos( level, (double) x, (double) y, (double) z,  itemStack);
+        popItemFromPos(level, (double) x, (double) y, (double) z, itemStack);
     }
 
+    
+
+    public static void popItemFromPos(LevelAccessor level, double x, double y, double z, ItemStack itemStack) {
+        popItemFromPos((Level) level, x, y, z, itemStack);
+    }
+
+    public static List<ItemStack> getItemStackFromLootTable(LevelAccessor level, Player player, String raw_ore_name) {
+
+        Builder builder = new LootParams.Builder((ServerLevel) level);
+        LootParams params = builder.create(LootContextParamSets.EMPTY);
+        builder.withLuck(player.getLuck());
+
+        @SuppressWarnings("null")
+        LootTable lootTable = level.getServer().reloadableRegistries()
+                .getLootTable(ResourceKey
+                        .create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(
+                                IDUtil.getModName(raw_ore_name), "blocks/"
+                                        + raw_ore_name.substring(raw_ore_name.lastIndexOf('.') + 1))));
+        return lootTable.getRandomItems(params);
+
+    }
 
 }

@@ -1,15 +1,12 @@
 package com.devdyna.alchemia.events;
 
-import com.devdyna.alchemia.init.Tags;
-
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.level.PistonEvent;
 
 public class PistonPush {
     @SubscribeEvent
-    public void PistonPushEvent(PistonEvent.Post event) {
-        if (event.getState().is(Tags.SIEVE)) {
-        }
-
+    public void PistonPushEvent(PistonEvent.Pre event) {
+        event.getLevel().setBlock(event.getFaceOffsetPos(), Blocks.STONE.defaultBlockState(), 32);
     }
 }

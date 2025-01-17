@@ -1,6 +1,6 @@
 package com.devdyna.alchemia.events;
 
-import com.devdyna.alchemia.init.Blocks;
+import com.devdyna.alchemia.init.Material;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -18,9 +18,9 @@ public class BlockClicked {
         ItemStack stack = event.getItemStack();
         Level level = event.getLevel();
         BlockState block = level.getBlockState(pos);
-
+        
         if (stack.is(com.devdyna.alchemia.init.Tags.AZALEA) && block.is(BlockTags.FLOWER_POTS)) {
-            level.setBlockAndUpdate(pos, Blocks.AZALEA.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, Material.AZALEA_BLOCK.get().defaultBlockState());
         }
 
     }

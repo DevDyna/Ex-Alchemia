@@ -6,8 +6,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import com.devdyna.alchemia.Main;
+import com.devdyna.alchemia.utils.Constants;
 
 public class CreativeTab {
 
@@ -20,12 +22,15 @@ public class CreativeTab {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS
             .register("example_tab", () -> CreativeModeTab.builder()
-                    .title(Component.translatable(Main.MODID+".tab"))
-                                                                           
+                    .title(Component.translatable(Main.MODID + ".tab"))
+
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(() -> Items.WOODEN_CROOK.get().getDefaultInstance())
+                    .icon(() -> Material.WOODEN_CROOK.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
-                        // output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For
-                        // your own tabs, this method is preferred over the event
+
+                        for (DeferredItem<?> i : Constants.AllItems()) {
+                            output.accept(i.get());
+                        }
+
                     }).build());
 }

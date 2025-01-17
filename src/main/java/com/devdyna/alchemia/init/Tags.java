@@ -9,16 +9,20 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class Tags {
-    public static final TagKey<Item> CROOKS = TagKey.create(BuiltInRegistries.ITEM.key(),
-            ResourceLocation.fromNamespaceAndPath(Main.MODID, "crooks"));
+    public static final TagKey<Item> CROOKS = tagItem("crook");
 
-            public static final TagKey<Item> AZALEA = TagKey.create(BuiltInRegistries.ITEM.key(),
-            ResourceLocation.fromNamespaceAndPath(Main.MODID, "azalea"));
+    public static final TagKey<Item> AZALEA = tagItem("azalea");
 
-            public static final TagKey<Block> SIEVE = TagKey.create(BuiltInRegistries.BLOCK.key(),
-            ResourceLocation.fromNamespaceAndPath(Main.MODID, "sieve"));
+    public static final TagKey<Block> SIEVE = tagBlock("sieve");
 
+    private static TagKey<Item> tagItem(String name) {
+        return TagKey.create(BuiltInRegistries.ITEM.key(),
+                ResourceLocation.fromNamespaceAndPath(Main.MODID, name));
+    }
 
+    private static TagKey<Block> tagBlock(String name) {
+        return TagKey.create(BuiltInRegistries.BLOCK.key(),
+                ResourceLocation.fromNamespaceAndPath(Main.MODID, name));
+    }
 
-           
 }

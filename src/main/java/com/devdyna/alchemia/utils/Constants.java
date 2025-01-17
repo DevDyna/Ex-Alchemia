@@ -1,30 +1,27 @@
 package com.devdyna.alchemia.utils;
 
-import com.devdyna.alchemia.events.BlockBreak;
-import com.devdyna.alchemia.events.BlockClicked;
-import com.devdyna.alchemia.events.PistonPush;
+import java.util.ArrayList;
 import com.devdyna.alchemia.init.*;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class Constants {
 
-        public static final Block[] AllBlocks = {
-                        Blocks.AZALEA.get(),
-                        Blocks.EXAMPLE_BLOCK.get()
+        public static final DeferredBlock<?>[] AllBlocks() {
+                ArrayList<DeferredBlock<?>> i = new ArrayList<>();
+                Material.BLOCKS.getEntries().forEach(e -> {
+                        i.add((DeferredBlock<?>) e);
+                });
+                return (DeferredBlock<?>[]) i.toArray();
         };
 
-        public static final Item[] AllItems = {
-                        Items.AZALEA.get(),
-                        Items.WOODEN_CROOK.get(),
-                        Items.BERRY.get()
-        };
-
-        public static final Object[] AllEvents = {
-                        new BlockBreak(),
-                        new BlockClicked(),
-                        new PistonPush()
+        public static final DeferredItem<?>[] AllItems() {
+                ArrayList<DeferredItem<?>> i = new ArrayList<>();
+                Material.ITEMS.getEntries().forEach(e -> {
+                        i.add((DeferredItem<?>) e);
+                });
+                return (DeferredItem<?>[]) i.toArray();
         };
 
 }

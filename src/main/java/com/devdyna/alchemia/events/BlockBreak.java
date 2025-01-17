@@ -3,7 +3,6 @@ package com.devdyna.alchemia.events;
 import java.util.List;
 
 import com.devdyna.alchemia.utils.LevelUtil;
-import com.devdyna.alchemia.utils.LootTableUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -18,7 +17,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 public class BlockBreak {
 
     @SubscribeEvent
-    public void BlockBreakEvent(BlockEvent.BreakEvent event) {
+    public void CrookBreak(BlockEvent.BreakEvent event) {
 
         LevelAccessor levelAccessor = event.getLevel();
         BlockPos pos = event.getPos();
@@ -32,14 +31,16 @@ public class BlockBreak {
 
             for (int i = 0; i < 10; i++) {
 
-                List<ItemStack> list = LootTableUtil.getItemStackFromLootTable(levelAccessor, player,
+                List<ItemStack> list = LevelUtil.getItemStackFromLootTable(levelAccessor, player,
                         blockname);
 
                 for (ItemStack itemStack : list) {
-                    LevelUtil.popItemFromPos((Level) levelAccessor, pos.getX()+0.25, pos.getY()+0.25, pos.getZ()+0.25, itemStack);
+                    LevelUtil.popItemFromPos((Level) levelAccessor, pos.getX() + 0.25, pos.getY() + 0.25,
+                            pos.getZ() + 0.25, itemStack);
                 }
             }
         }
 
     }
+
 }
