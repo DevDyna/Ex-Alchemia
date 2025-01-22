@@ -31,8 +31,7 @@ public class BlockBreak {
 
             for (int i = 0; i < 10; i++) {
 
-                List<ItemStack> list = LevelUtil.getItemStackFromLootTable(levelAccessor, player,
-                        blockname);
+                List<ItemStack> list = LevelUtil.getItemStackFromLootTable(levelAccessor, blockname, player);
 
                 for (ItemStack itemStack : list) {
                     LevelUtil.popItemFromPos((Level) levelAccessor, pos.getX() + 0.25, pos.getY() + 0.25,

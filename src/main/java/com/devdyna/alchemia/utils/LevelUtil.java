@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootParams.Builder;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -64,19 +65,17 @@ public class LevelUtil {
         popItemFromPos(level, (double) x, (double) y, (double) z, itemStack);
     }
 
-    
-
     public static void popItemFromPos(LevelAccessor level, double x, double y, double z, ItemStack itemStack) {
         popItemFromPos((Level) level, x, y, z, itemStack);
     }
 
-    public static List<ItemStack> getItemStackFromLootTable(LevelAccessor level, Player player, String raw_ore_name) {
+    @SuppressWarnings("null")
+    public static List<ItemStack> getItemStackFromLootTable(LevelAccessor level, String raw_ore_name, float luck) {
 
         Builder builder = new LootParams.Builder((ServerLevel) level);
         LootParams params = builder.create(LootContextParamSets.EMPTY);
-        builder.withLuck(player.getLuck());
+        builder.withLuck(luck);
 
-        @SuppressWarnings("null")
         LootTable lootTable = level.getServer().reloadableRegistries()
                 .getLootTable(ResourceKey
                         .create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(
@@ -84,6 +83,35 @@ public class LevelUtil {
                                         + raw_ore_name.substring(raw_ore_name.lastIndexOf('.') + 1))));
         return lootTable.getRandomItems(params);
 
+    }
+
+    public static List<ItemStack> getItemStackFromLootTable(LevelAccessor level, String raw_ore_name) {
+        return getItemStackFromLootTable(level, raw_ore_name, 1);
+    }
+
+    public static List<ItemStack> getItemStackFromLootTable(LevelAccessor level, String raw_ore_name, Player player) {
+        return getItemStackFromLootTable(level, raw_ore_name, player.getLuck());
+    }
+
+    public static List<ItemStack> getItemStackFromLootTable(LevelAccessor level, BlockState state) {
+        return getItemStackFromLootTable(level, state.getBlock().getDescriptionId(), 1);
+    }
+
+    // example 
+    /**
+     * 
+     * @param level
+     * @param ModName "minecraft"
+     * @param resourcelocation "blocks/stone"
+     * @return
+     */
+    public static List<ItemStack> getItemStackFromLootTable(ServerLevel level, String ModName,
+            String resourcelocation) {
+        LootTable lootTable = level.getServer().reloadableRegistries()
+                .getLootTable(ResourceKey
+                        .create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(
+                                ModName, resourcelocation)));
+        return lootTable.getRandomItems(new LootParams.Builder(level).create(LootContextParamSets.EMPTY));
     }
 
 }

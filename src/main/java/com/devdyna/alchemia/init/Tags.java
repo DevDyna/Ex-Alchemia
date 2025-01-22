@@ -15,6 +15,9 @@ public class Tags {
 
     public static final TagKey<Block> SIEVE = tagBlock("sieve");
 
+    public static final TagKey<Block> DEPOSIT = tagBlock("deposits");
+
+
     private static TagKey<Item> tagItem(String name) {
         return TagKey.create(BuiltInRegistries.ITEM.key(),
                 ResourceLocation.fromNamespaceAndPath(Main.MODID, name));

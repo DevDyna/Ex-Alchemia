@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
+// import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -28,9 +29,13 @@ public class CreativeTab {
                     .icon(() -> Material.WOODEN_CROOK.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
 
-                        for (DeferredItem<?> i : Constants.AllItems()) {
+                        for (DeferredItem<?> i : Constants.AllItems) {
                             output.accept(i.get());
                         }
+                        
+                        // for (DeferredBlock<?> i : Constants.AllBlocks) {
+                        //     output.accept(i.asItem());
+                        // }
 
                     }).build());
 }

@@ -1,4 +1,4 @@
-package com.devdyna.alchemia.init.special;
+package com.devdyna.alchemia.init.builder;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;

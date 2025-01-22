@@ -2,7 +2,7 @@ package com.devdyna.alchemia;
 
 import com.devdyna.alchemia.events.BlockBreak;
 import com.devdyna.alchemia.events.BlockClicked;
-import com.devdyna.alchemia.events.PistonPush;
+// import com.devdyna.alchemia.events.PistonPush;
 import com.devdyna.alchemia.init.Material;
 
 import net.neoforged.bus.api.IEventBus;
@@ -24,7 +24,7 @@ public class Main {
 
             NeoForge.EVENT_BUS.register(new BlockBreak());
             NeoForge.EVENT_BUS.register(new BlockClicked());
-            NeoForge.EVENT_BUS.register(new PistonPush());
+            // NeoForge.EVENT_BUS.register(new PistonPush());
         
 
     }

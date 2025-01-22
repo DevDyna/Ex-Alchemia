@@ -1,4 +1,4 @@
-package com.devdyna.alchemia.init.special.Miner;
+package com.devdyna.alchemia.init.builder.Miner;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 

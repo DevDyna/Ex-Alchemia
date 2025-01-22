@@ -1,4 +1,4 @@
-package com.devdyna.alchemia.init.special;
+package com.devdyna.alchemia.init.builder;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -47,6 +47,11 @@ public class PottedAzalea extends Block {
 
     public BlockState getStateForAge(int age) {
         return this.defaultBlockState().setValue(AGE, Integer.valueOf(age));
+    }
+
+    @SuppressWarnings("null")
+    protected boolean isRandomlyTicking(BlockState state){
+        return state.getValue(AGE) < 7;
     }
 
     @SuppressWarnings("null")
