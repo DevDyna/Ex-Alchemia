@@ -16,6 +16,9 @@ public class SieveBE extends BlockEntity {
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T ignoredT) {
         level.setBlockAndUpdate(pos.above(), Blocks.STONE_BRICKS.defaultBlockState());
+        
+        int a = new Scheduled(server.getickCount() + 20 /*1s delay*/, () -> null);
+    
     }
 
 }
