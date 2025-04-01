@@ -37,8 +37,8 @@ public class PottedAzalea extends Block {
         return SHAPE_BY_AGE[state.getValue(AGE)];
     }
 
-    public PottedAzalea(BlockBehaviour.Properties prop) {
-        super(prop.randomTicks().sound(SoundType.FLOWERING_AZALEA)
+    public PottedAzalea() {
+        super(BlockBehaviour.Properties.of().randomTicks().sound(SoundType.FLOWERING_AZALEA)
                 .instabreak().noOcclusion()
                 .pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(stateDefinition.any()

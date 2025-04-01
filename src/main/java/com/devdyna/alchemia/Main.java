@@ -1,9 +1,9 @@
 package com.devdyna.alchemia;
 
-import com.devdyna.alchemia.events.BlockBreak;
-import com.devdyna.alchemia.events.BlockClicked;
-// import com.devdyna.alchemia.events.PistonPush;
+import com.devdyna.alchemia.events.block.broken;
 import com.devdyna.alchemia.init.Material;
+import com.devdyna.alchemia.init.compat.core;
+import com.devdyna.alchemia.utils.LogUtil;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -14,18 +14,14 @@ import net.neoforged.neoforge.common.NeoForge;
 public class Main {
     public static final String MODID = "alchemia";
 
-    public Main(IEventBus modEventBus, ModContainer modContainer) {
-        
-        Material.register(modEventBus);
+    public Main(IEventBus bus, ModContainer mc) {
 
+        new LogUtil();
 
-        com.devdyna.alchemia.init.CreativeTab.register(modEventBus);
+        Material.register(bus);
+        core.registerCompat();
 
-
-            NeoForge.EVENT_BUS.register(new BlockBreak());
-            NeoForge.EVENT_BUS.register(new BlockClicked());
-            // NeoForge.EVENT_BUS.register(new PistonPush());
-        
+        NeoForge.EVENT_BUS.register(new broken());
 
     }
 }
