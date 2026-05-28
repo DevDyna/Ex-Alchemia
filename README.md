@@ -1,3 +1,3 @@
-# CakeStickLib Addon Template
+# Ex Alchemia
 
-This template include a functional CakeStickLib Plugin , a configured DataGen and a pre-set Jei Plugin
+Collection of magic and tech stuff related to skyblock experience
